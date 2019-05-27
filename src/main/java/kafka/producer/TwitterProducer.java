@@ -20,17 +20,17 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;ען
+import java.util.concurrent.TimeUnit;
 
 public class TwitterProducer {
 
     Logger logger = LoggerFactory.getLogger(TwitterProducer.class.getName());
 
     // use your own credentials - don't share them with anyone
-    String consumerKey = "jUmh7Y87lUwClZl0bdhBk5ftD";
-    String consumerSecret = "ZMJ8s4ag2RWYL161pxhpYK9SxtDHigdyPu94UbGHOAE5qvclOo";
-    String token = "034388815438381056-TJzbb3HJiRoqPzo2Y5FJGWtFtlA8s7";
-    String secret = "RDaryqgA51nM48Afo2E285vdc0qJO35yoAY11xLAoz3Oy";
+    String consumerKey = "";
+    String consumerSecret = "";
+    String token = "";
+    String secret = "";
 
     List<String> terms = Lists.newArrayList("bitcoin", "usa", "politics", "sport", "soccer", "kafka", "");
 
@@ -123,15 +123,15 @@ public class TwitterProducer {
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // create safe Producer
-        properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
-        properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
-        properties.setProperty(ProducerConfig.RETRIES_CONFIG, Integer.toString(Integer.MAX_VALUE));
-        properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5"); // kafka 2.0 >= 1.1 so we can keep this as 5. Use 1 otherwise.
+       // properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+        //properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
+        //properties.setProperty(ProducerConfig.RETRIES_CONFIG, Integer.toString(Integer.MAX_VALUE));
+        //properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5"); // kafka 2.0 >= 1.1 so we can keep this as 5. Use 1 otherwise.
 
         // high throughput producer (at the expense of a bit of latency and CPU usage)
-        properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");   // compression
-        properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
-        properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024)); // 32 KB batch size
+        //properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");   // compression
+        //properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
+        //properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024)); // 32 KB batch size
 
         // create the producer
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
